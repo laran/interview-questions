@@ -1,6 +1,6 @@
 import SpiralArray from "../src/spiral-array";
 
-describe("Spiray Array", () => {
+describe("Spiral Array", () => {
 
 	it("should handle zero", () => {
 		expect(SpiralArray.spiralize(0)).toEqual([])
