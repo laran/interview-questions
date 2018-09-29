@@ -1,0 +1,34 @@
+{
+  "name": "@laran/interview-questions",
+  "version": "1.0.0",
+  "description": "A collection of interview question and solutions in Javascript",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "babel src --out-dir build",
+    "test": "jest",
+    "test:watch": "jest --watchAll"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/laran/interview-questions.git"
+  },
+  "author": "Laran Evans <laran@laranevans.com> (http://www.laranevans.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/laran/interview-questions/issues"
+  },
+  "homepage": "https://github.com/laran/interview-questions#readme",
+  "dependencies": {
+    "@laran/readable-helpers": "^1.0.5"
+  },
+  "jest": {
+    "verbose": true,
+    "rootDir": "tests"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "jest": "^23.6.0",
+    "yarn": "^1.9.4"
+  }
+}
