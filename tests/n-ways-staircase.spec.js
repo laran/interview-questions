@@ -4,7 +4,7 @@ describe("N-Ways Staircase", () => {
 
 	it('should work with 3 steps and maxStepSize = 3', () => {
 		expect(Staircase.waysToClimb(3, 3)).toEqual(4);
-		// 1, 1, 1, 1
+		// 1, 1, 1
 		// 1, 2
 		// 2, 1
 		// 3
