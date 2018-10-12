@@ -6,6 +6,9 @@ import java.util.stream.Collectors;
 
 public class PathThrough2DArray {
 
+	private static int[] DX = new int[]{-1, 0, 1, 0};
+	private static int[] DY = new int[]{0, 1, 0, -1};
+
 	public static void printPath(List<Coordinate> path) {
 		if (path == null) {
 			System.out.println("No path exists");
@@ -21,7 +24,7 @@ public class PathThrough2DArray {
 		for (int y = 0; y < matrix.length; y++) {
 			for (int x = 0; x < matrix[y].length; x++) {
 				Coordinate coordinate = new Coordinate(x, y);
-				coordinate.findNeighbors(matrix);
+				findNeighbors(coordinate, matrix);
 				coordinates.put(Coordinate.keyFor(coordinate), coordinate);
 			}
 		}
@@ -33,11 +36,13 @@ public class PathThrough2DArray {
 		return path;
 	}
 
-	public static LinkedList<Coordinate> pathBetween(Coordinate origin, Coordinate target, Map<String, Coordinate> coordinates) {
+	private static LinkedList<Coordinate> pathBetween(
+		Coordinate origin, Coordinate target, Map<String, Coordinate> coordinates) {
 		return pathBetween(origin, target, coordinates, new HashSet<>());
 	}
 
-	private static LinkedList<Coordinate> pathBetween(Coordinate origin, Coordinate target, Map<String, Coordinate> coordinates, Set<String> visited) {
+	private static LinkedList<Coordinate> pathBetween(
+		Coordinate origin, Coordinate target, Map<String, Coordinate> coordinates, Set<String> visited) {
 		visited.add(origin.key());
 
 		for (String key : origin.getNeighbors()) {
@@ -48,10 +53,10 @@ public class PathThrough2DArray {
 					LinkedList<Coordinate> path = new LinkedList<>();
 					path.add(origin);
 					path.add(neighbor);
-					// could also just do path.add(target)
 					return path;
 				} else {
-					LinkedList<Coordinate> pathToDestination = pathBetween(neighbor, target, coordinates, visited);
+					LinkedList<Coordinate> pathToDestination =
+						pathBetween(neighbor, target, coordinates, visited);
 					if (pathToDestination != null) {
 						// we found a route
 						pathToDestination.addFirst(origin);
@@ -65,10 +70,25 @@ public class PathThrough2DArray {
 		return null;
 	}
 
+	private static void findNeighbors(Coordinate coordinate, int[][] matrix) {
+		for (int i = 0; i < DX.length; i++) {
+			int x1 = coordinate.x + DX[i];
+			int y1 = coordinate.y + DY[i];
+
+			if (x1 >= 0 && y1 >= 0) {
+				if (y1 < matrix.length) {
+					if (x1 < matrix[y1].length) {
+						if (matrix[y1][x1] == 0) {
+							coordinate.neighbors.add(Coordinate.coordsToKey(x1, y1));
+						}
+					}
+				}
+			}
+		}
+	}
+
 	public static class Coordinate {
 
-		private static int[] DX = new int[]{-1, 0, 1, 0};
-		private static int[] DY = new int[]{0, 1, 0, -1};
 		int x;
 		int y;
 		Set<String> neighbors;
@@ -76,7 +96,7 @@ public class PathThrough2DArray {
 		public Coordinate(int x, int y) {
 			this.x = x;
 			this.y = y;
-			this.neighbors = new HashSet<>();
+			this.neighbors = new TreeSet<>();
 		}
 
 		public static String keyFor(Coordinate coordinate) {
@@ -103,21 +123,8 @@ public class PathThrough2DArray {
 			return neighbors;
 		}
 
-		public void findNeighbors(int[][] matrix) {
-			for (int i = 0; i < DX.length; i++) {
-				int x1 = this.x + DX[i];
-				int y1 = this.y + DY[i];
-
-				if (x1 >= 0 && y1 >= 0) {
-					if (y1 < matrix.length) {
-						if (x1 < matrix[y1].length) {
-							if (matrix[y1][x1] == 0) {
-								neighbors.add(coordsToKey(x1, y1));
-							}
-						}
-					}
-				}
-			}
+		public void setNeighbors(Set<String> neighbors) {
+			this.neighbors = neighbors;
 		}
 
 		@Override

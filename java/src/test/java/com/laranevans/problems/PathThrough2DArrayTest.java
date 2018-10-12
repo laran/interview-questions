@@ -23,6 +23,7 @@ public class PathThrough2DArrayTest {
 		};
 		List<PathThrough2DArray.Coordinate> path = PathThrough2DArray.pathThrough(matrix);
 		PathThrough2DArray.printPath(path);
+
 		assertThat(path, is(notNullValue()));
 		assertThat(path.size(), is(greaterThan(0)));
 	}
