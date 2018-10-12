@@ -1,5 +1,5 @@
 /* (C) Copyright 2017-2018 Laran Evans */
-package com.laranevans.problems;
+package com.laranevans.questions;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

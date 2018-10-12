@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.laranevans</groupId>
-    <artifactId>problems</artifactId>
+    <artifactId>questions</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>

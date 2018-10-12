@@ -1,14 +1,20 @@
 /* (C) Copyright 2017-2018 Laran Evans */
-package com.laranevans.problems;
+package com.laranevans.questions;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class PathThrough2DArray {
 
+	// A set of moves to make to check for neighbors in all directions
 	private static int[] DX = new int[]{-1, 0, 1, 0};
 	private static int[] DY = new int[]{0, 1, 0, -1};
 
+	/**
+	 * Display the path if one exists.
+	 *
+	 * @param path
+	 */
 	public static void printPath(List<Coordinate> path) {
 		if (path == null) {
 			System.out.println("No path exists");
@@ -19,6 +25,12 @@ public class PathThrough2DArray {
 			.collect(Collectors.joining(" -> ")));
 	}
 
+	/**
+	 * Find a path through the matrix.
+	 *
+	 * @param matrix
+	 * @return
+	 */
 	public static List<Coordinate> pathThrough(int[][] matrix) {
 		Map<String, Coordinate> coordinates = new HashMap<>();
 		for (int y = 0; y < matrix.length; y++) {
@@ -31,7 +43,8 @@ public class PathThrough2DArray {
 
 		List<Coordinate> path = pathBetween(
 			coordinates.get(Coordinate.coordsToKey(0, 0)),
-			coordinates.get(Coordinate.coordsToKey(matrix[0].length - 1, matrix.length - 1)),
+			coordinates.get(Coordinate.coordsToKey(
+				matrix[0].length - 1, matrix.length - 1)),
 			coordinates);
 		return path;
 	}
@@ -42,7 +55,10 @@ public class PathThrough2DArray {
 	}
 
 	private static LinkedList<Coordinate> pathBetween(
-		Coordinate origin, Coordinate target, Map<String, Coordinate> coordinates, Set<String> visited) {
+		Coordinate origin, Coordinate target, Map<String, Coordinate> coordinates,
+		Set<String> visited) {
+
+		// Remember what coordinate we're at to avoid cycles in our path.
 		visited.add(origin.key());
 
 		for (String key : origin.getNeighbors()) {
@@ -58,7 +74,9 @@ public class PathThrough2DArray {
 					LinkedList<Coordinate> pathToDestination =
 						pathBetween(neighbor, target, coordinates, visited);
 					if (pathToDestination != null) {
-						// we found a route
+						// We found a route. Prepend origin to the route and pass it
+						// back up the call stack all the way back to the top left
+						// coordinate.
 						pathToDestination.addFirst(origin);
 						return pathToDestination;
 					}
@@ -66,10 +84,15 @@ public class PathThrough2DArray {
 			}
 		}
 
+		// We're leaving origin without finding a path.
+		// Remove origin from the set of visited coordinates to allow
+		// other coordinates to pass through origin to look for a path.
 		visited.remove(origin.key());
+
 		return null;
 	}
 
+	// Check which paths adjacent to a Coordinate are passable.
 	private static void findNeighbors(Coordinate coordinate, int[][] matrix) {
 		for (int i = 0; i < DX.length; i++) {
 			int x1 = coordinate.x + DX[i];
@@ -87,11 +110,14 @@ public class PathThrough2DArray {
 		}
 	}
 
+	/**
+	 * Represents an x,y coordinate and reachable neighbors.
+	 */
 	public static class Coordinate {
 
-		int x;
-		int y;
-		Set<String> neighbors;
+		private int x;
+		private int y;
+		private Set<String> neighbors;
 
 		public Coordinate(int x, int y) {
 			this.x = x;
