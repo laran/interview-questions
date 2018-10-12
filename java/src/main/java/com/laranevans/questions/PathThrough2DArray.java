@@ -32,6 +32,8 @@ public class PathThrough2DArray {
 	 * @return
 	 */
 	public static List<Coordinate> pathThrough(int[][] matrix) {
+		// Visit every coordinate in the matrix to discover which
+		// neighboring coordinates are reachable.
 		Map<String, Coordinate> coordinates = new HashMap<>();
 		for (int y = 0; y < matrix.length; y++) {
 			for (int x = 0; x < matrix[y].length; x++) {
@@ -41,6 +43,10 @@ public class PathThrough2DArray {
 			}
 		}
 
+		// Now that we've translated from a 2D-array of integers into
+		// something more intuitive, and that we now know all reachable
+		// neighbors for every coordinate, look for a path from top left
+		// to bottom right.
 		List<Coordinate> path = pathBetween(
 			coordinates.get(Coordinate.coordsToKey(0, 0)),
 			coordinates.get(Coordinate.coordsToKey(
