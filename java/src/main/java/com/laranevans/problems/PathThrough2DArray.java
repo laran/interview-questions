@@ -84,15 +84,7 @@ public class PathThrough2DArray {
 		}
 
 		public static String coordsToKey(int x, int y) {
-			return String.format("%s:%s", x, y);
-		}
-
-		public static int[] keyToCoords(String key) {
-			String[] parts = key.split(":");
-			return new int[]{
-				Integer.parseInt(parts[0]),
-				Integer.parseInt(parts[1])
-			};
+			return String.format("%s:%s", y, x);
 		}
 
 		public int getX() {
@@ -130,7 +122,7 @@ public class PathThrough2DArray {
 
 		@Override
 		public String toString() {
-			return "(" + x + ", " + y + ")";
+			return "(" + y + ", " + x + ")";
 		}
 	}
 
