@@ -2,21 +2,20 @@
  *
  * @param numberOfSteps
  * @param maxStepSize
- * @param memo a Map, but could also be an array of size numberOfSteps + 1
  */
-export const waysToClimb = (numberOfSteps, maxStepSize, memo = {}) => {
-	if (numberOfSteps < 0) {
-		return 0;
-	} else if (numberOfSteps === 0) {
-		return 1; // This is the most important line. It defines the base-case.
-	} else if (memo.hasOwnProperty(numberOfSteps)) {
-		return memo[numberOfSteps];
-	} else {
-		let n = 0;
-		for (let i = 1; i <= maxStepSize; i++) {
-			n += waysToClimb(numberOfSteps - i, maxStepSize, memo);
+export const waysToClimb = (numberOfSteps, maxStepSize) => {
+	// initialize base cases
+	let memo = {0: 1, 1: 1};
+
+	// we already know the answer when steps < 2. so solve for steps > 1
+	for (let currentStep = 2; currentStep <= numberOfSteps; currentStep++) {
+		memo[currentStep] = 0;
+
+		// accumulate the sum of combinations for all step sizes from 1 to min(currentStep, maxStepSize)
+		for (let stepSize = 1; stepSize <= currentStep && stepSize <= maxStepSize; stepSize++) {
+			memo[currentStep] = memo[currentStep] + memo[currentStep - stepSize];
 		}
-		memo[numberOfSteps] = n; // set memo atomically
-		return n;
 	}
+
+	return memo[numberOfSteps];
 };
