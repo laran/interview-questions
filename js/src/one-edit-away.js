@@ -1,5 +1,3 @@
-import {isEqualTo, isLessThan, isLessThanOrEqualTo, isNotEqualTo} from '@laran/readable-helpers'
-
 /**
  * ---
  * Requirements:
@@ -46,9 +44,9 @@ export default class OneEditAway {
 
 	static _areEqualFrom(a1, i1, a2, i2) {
 		// ensure that a1 and a2 have the same number of elements after i1/i2 respectively
-		if (isEqualTo(a1.length - i1, a2.length - i2)) {
+		if (a1.length - i1 === a2.length - i2) {
 			while(i1 < a1.length && i2 < a2.length) {
-				if (isNotEqualTo(a1[i1], a2[i2])) {
+				if (a1[i1] !== a2[i2]) {
 					return false;
 				}
 				i1++;
@@ -71,7 +69,7 @@ export default class OneEditAway {
 	static appliesTo(s1, s2) {
 
 		// s1 and s2 can't be the same string. that would zero edits
-		if (isEqualTo(s1, s2)) {
+		if (s1 === s2) {
 			return false;
 		}
 
@@ -81,8 +79,8 @@ export default class OneEditAway {
 
 		let distance = 0;
 		let i1 = 0, i2 = 0;
-		while (isLessThan(distance, 2) && isLessThan(i1, a1.length) && isLessThan(i2, a2.length)) {
-			if (isNotEqualTo(a1[i1], a2[i2])) {
+		while (distance < 2 && i1 < a1.length && i2 < a2.length) {
+			if (a1[i1] !== a2[i2]) {
 				return OneEditAway._isInsertEdit(a1, i1, a2, i2)
 					|| OneEditAway._isReplaceEdit(a1, i1, a2, i2);
 			}
@@ -90,6 +88,6 @@ export default class OneEditAway {
 			i2++;
 		}
 
-		return isLessThanOrEqualTo(distance, 1);
+		return distance <= 1;
 	}
 }
