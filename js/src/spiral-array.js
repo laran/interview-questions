@@ -1,5 +1,3 @@
-import {isGreaterThan, isLessThan, isEqualTo, isNotArray} from '@laran/readable-helpers'
-
 // To generate the array call SpiralArray.spiralize(n)
 // To print the array call SpiralArray.print(SpiralArray.spiralize(n))
 export default class SpiralArray {
@@ -47,7 +45,7 @@ export default class SpiralArray {
 		}
 
 		// fill in the center spot when n is odd
-		if (isEqualTo(n % 2, 1)) {
+		if (n % 2 === 1) {
 			a[(n-1)/2][(n-1)/2] = n*n;
 		}
 
