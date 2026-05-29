@@ -24,7 +24,7 @@ def container_with_most_water(heights: List[int]) -> int:
         21
 
     Note:
-        See: https://www.hellointerview.com/learn/code/two-pointers/container-with-most-water
+         See Also: https://www.hellointerview.com/learn/code/two-pointers/container-with-most-water
     """
     left, right, max_area = 0, len(heights) - 1, 0
     while left < right:

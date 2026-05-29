@@ -21,7 +21,7 @@ def two_sum(sorted_nums: List[int], target: int) -> List[int] | None:
         [1, 4]
 
     Note:
-        See: https://www.hellointerview.com/learn/code/two-pointers/two-sum
+         See Also: https://www.hellointerview.com/learn/code/two-pointers/two-sum
     """
     left, right = 0, len(sorted_nums) - 1
 

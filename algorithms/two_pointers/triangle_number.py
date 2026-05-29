@@ -22,7 +22,7 @@ def triangle_number(nums: List[int]) -> int:
         10
 
     Note:
-        See: https://www.hellointerview.com/learn/code/two-pointers/valid-triangle-number
+         See Also: https://www.hellointerview.com/learn/code/two-pointers/valid-triangle-number
     """
 
     # Sorting lets us treat nums[i] as the largest side and use two pointers.

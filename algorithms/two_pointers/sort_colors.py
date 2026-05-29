@@ -19,7 +19,7 @@ def sort_colors(nums: List[int]) -> None:
     4. All elements to the right of `right` are 2s.
 
     Notes:
-        See: https://www.hellointerview.com/learn/code/two-pointers/sort-colors
+         See Also: https://www.hellointerview.com/learn/code/two-pointers/sort-colors
 
     """
 

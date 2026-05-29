@@ -31,7 +31,7 @@ def three_sum(nums: List[int]) -> List[List[int]]:
         [[-1, -1, 2], [-1, 0, 1]]
 
     Note:
-        See: https://www.hellointerview.com/learn/code/two-pointers/3-sum
+         See Also: https://www.hellointerview.com/learn/code/two-pointers/3-sum
     """
 
     nums.sort()
