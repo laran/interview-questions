@@ -18,6 +18,9 @@ def sort_colors(nums: List[int]) -> None:
     3. All elements between `i` and `right` are unsorted.
     4. All elements to the right of `right` are 2s.
 
+    Notes:
+        See: https://www.hellointerview.com/learn/code/two-pointers/sort-colors
+
     """
 
     i, left, right = 0, 0, len(nums) - 1
