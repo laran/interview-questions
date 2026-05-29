@@ -1,4 +1,26 @@
-def max_subarray_sum(nums, k) -> float:
+from typing import List
+
+
+def max_subarray_sum(nums: List[int], k) -> float:
+	"""Return the maximum sum of any contiguous subarray of length k.
+
+	Uses a fixed-size sliding window: maintain a running sum of the current
+	window, and at each full window compare against the running maximum
+	before sliding one element right.
+
+	Args:
+	    nums: The list of integers to scan.
+	    k: The window size. Must satisfy 1 <= k <= len(nums).
+
+	Returns:
+	    The maximum sum over all length-k contiguous subarrays.
+
+	Raises:
+	    ValueError: If k is not in the range 1 to len(nums).
+	"""
+	if not 1 <= k <= len(nums):
+		raise ValueError(f"k must be between 1 and {len(nums)}, got {k}")
+	
 	max_sum = float('-inf')
 	state = 0
 	start = 0
