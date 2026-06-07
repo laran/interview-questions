@@ -1,7 +1,7 @@
 from typing import List
 
 
-def max_subarray_sum(nums: List[int], k) -> float:
+def max_sum_of_subarrays(nums: List[int], k) -> float:
 	"""Return the maximum sum of any contiguous subarray of length k.
 
 	Uses a fixed-size sliding window: maintain a running sum of the current
@@ -48,4 +48,4 @@ def max_subarray_sum(nums: List[int], k) -> float:
 
 
 if __name__ == '__main__':
-	assert max_subarray_sum([2, 1, 5, 1, 3, 2], 3) == 9
+	assert max_sum_of_subarrays([2, 1, 5, 1, 3, 2], 3) == 9
